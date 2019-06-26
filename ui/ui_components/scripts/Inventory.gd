@@ -2,17 +2,12 @@ extends GridContainer
 
 var ItemClass = preload("res://ui/ui_components/scripts/Item.gd");
 var ItemSlotClass = preload("res://ui/ui_components/scripts/ItemSlot.gd");
-
 var slotTexture = preload("res://ui/main_ui/assets/ability_bar_icon_bg.png");
 
 var slotList
 var itemList
 var holdingItem = null;
-var slots_amount = 20
 var inventory
-
-func _ready():
-	pass
 
 func setup_inventory_menu(other):
 	slotList = Array()
@@ -34,13 +29,14 @@ func setup_inventory_menu(other):
 				var itemName = item.name;
 				var itemIcon = item.icon;
 				var new_item = ItemClass.new(itemName, itemIcon, null, item.description)
+				new_item.itemData = item
 				itemList.append(new_item);
 				slotList[index].setItem(new_item)
 			index += 1
 
 
 func _input(event):
-	if holdingItem != null and holdingItem.picked:
+	if holdingItem and holdingItem.picked:
 		holdingItem.rect_global_position = Vector2(event.position.x, event.position.y);
 
 func _gui_input(event):
@@ -60,12 +56,17 @@ func _gui_input(event):
 				var tempItem = clickedSlot.item;
 				var oldSlot = slotList[slotList.find(holdingItem.itemSlot)];
 				clickedSlot.pickItem();
+				inventory.get_slot(clickedSlot.slotIndex)
+				inventory.remove_slot(clickedSlot.slotIndex)
 				clickedSlot.putItem(holdingItem);
+				inventory.add_to_slot(holdingItem.itemData, clickedSlot.slotIndex)
 				holdingItem = null;
 				oldSlot.putItem(tempItem);
+				inventory.add_to_slot(tempItem.itemData, oldSlot.slotIndex)
+				
 			else:
 				clickedSlot.putItem(holdingItem);
-				#inventory.add_to_slot(item, x):
+				inventory.add_to_slot(holdingItem.itemData, clickedSlot.slotIndex)
 				# GLOBAL LIST OF ACTIVE ITEMS AS A SINGLETON
 				holdingItem = null;
 				

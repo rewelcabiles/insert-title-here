@@ -1,0 +1,19 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/common/transition/transition.shader" type="Shader" id=1]
+[ext_resource path="res://scenes/game_dungeons/scripts/dungeon.gd" type="Script" id=2]
+[ext_resource path="res://entities/player/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/common/camera/camera_parent.tscn" type="PackedScene" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/cutoff = null
+shader_param/smooth_size = null
+
+[node name="dungeon" type="Node2D"]
+material = SubResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+
+[node name="camera" parent="." instance=ExtResource( 4 )]

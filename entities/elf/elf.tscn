@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://entities/common/character.tscn" type="PackedScene" id=1]
+
+[node name="character" instance=ExtResource( 1 )]
+max_mana = 5
+mana = 5
+strength = 4
+magic = 2
+agility = 8
+
+[node name="sprite" parent="." index="0"]
+frame = 1

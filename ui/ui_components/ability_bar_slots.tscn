@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://ui/ui_components/scripts/ability_bar_slots.gd" type="Script" id=1]
+[ext_resource path="res://ui/main_ui/assets/ability_bar_icon_bg.png" type="Texture" id=2]
+[ext_resource path="res://ui/main_ui/assets/ability_bar_icon_bg_selected.png" type="Texture" id=3]
+
+[node name="ability_bar_slots" type="MarginContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+default_bg = ExtResource( 2 )
+select_bg = ExtResource( 3 )
+
+[node name="background" type="TextureRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 2 )
+
+[node name="icon" type="TextureRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+rect_min_size = Vector2( 64, 64 )

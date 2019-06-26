@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/ui_components/ability_bar_slots.tscn" type="PackedScene" id=1]
+
+[node name="ability_bar_slots" instance=ExtResource( 1 )]

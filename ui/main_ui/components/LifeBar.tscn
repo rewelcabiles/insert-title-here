@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://ui/ui_components/progress_bars.tscn" type="PackedScene" id=1]
+
+[node name="Bar" index="0" instance=ExtResource( 1 )]
+value = 20

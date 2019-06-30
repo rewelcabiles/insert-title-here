@@ -7,6 +7,7 @@ export(int) var magic setget set_magic
 export(int) var agility setget set_agility
 
 var player
+var inventory_open = false
 
 signal value_change
 
@@ -34,4 +35,20 @@ func set_slot(slot, texture):
 func select_slot(slot):
 	get_tree().call_group("ability_slots", "toggle_select", int(slot))
 
-
+func reset_center():
+	for child in get_node("Center").get_children():
+		child.queue_free()
+	get_node("Center").visible = false
+		
+func _on_Inventory_Button_pressed():
+	reset_center()
+	get_node("Center").visible = true
+	if inventory_open == false:
+		var inventory_menu = load("res://ui/ui_components/inventory.tscn").instance()
+		inventory_menu.initialize_container(player.sprite.inventory)
+		get_node("Center").add_child(inventory_menu)
+		inventory_open = true
+	if inventory_open == true:
+		inventory_open = false
+	
+	

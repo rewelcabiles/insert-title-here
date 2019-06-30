@@ -95,7 +95,7 @@ margin_bottom = -249.0
 text = "Exit"
 
 [node name="container" parent="." instance=ExtResource( 11 )]
-position = Vector2( 0, -172 )
+position = Vector2( 24, -145 )
 [connection signal="entity_entered" from="to_exit" to="." method="_on_to_exit_entity_entered" flags=6]
 [connection signal="entity_entered" from="to_start_game" to="." method="_on_to_start_game_entity_entered" flags=6]
 [connection signal="input_event" from="warrior" to="." method="_on_warrior_input_event"]

@@ -32,6 +32,11 @@ onready var inventory = $Inventory
 func get_inventory():
 	return inventory
 
+signal container_opened
+
+func open_container(other_inventory):
+	emit_signal("container_opened", other_inventory)
+
 # Abilities
 export(Script) var ability_book = load("res://abilities/magic_abilities/spell_book/mage_spell_book.gd").new() setget set_skills
 func activate_skill(location):
@@ -76,12 +81,12 @@ func _process(delta):
 	move_and_slide(velocity)
 
 
-
 func _ready():
 	stats.set_entity(self)
 	sprite = $sprite
-	var new_item = Item_Generator.Create_Item(1)
-	inventory.add_to_first_empty_slot(new_item)
+	inventory.add_to_first_empty_slot(Item_Generator.Create_Item(0))
+	inventory.add_to_first_empty_slot(Item_Generator.Create_Item(1))
+	
 
 func move_to_scene(scene):
 	get_parent().remove_child(self)

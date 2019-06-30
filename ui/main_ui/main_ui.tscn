@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://ui/main_ui/scripts/main_ui.gd" type="Script" id=1]
 [ext_resource path="res://ui/main_ui/components/stat_strength.tscn" type="PackedScene" id=2]
@@ -7,18 +7,15 @@
 [ext_resource path="res://ui/assets/frame_portrait.png" type="Texture" id=5]
 [ext_resource path="res://ui/main_ui/components/LifeBar.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/main_ui/components/ManaBar.tscn" type="PackedScene" id=7]
-[ext_resource path="res://ui/main_ui/components/Slot1.tscn" type="PackedScene" id=8]
-[ext_resource path="res://ui/main_ui/assets/ability_bar_icon_bg_primary.png" type="Texture" id=9]
-[ext_resource path="res://ui/main_ui/components/Slot2.tscn" type="PackedScene" id=10]
-[ext_resource path="res://ui/main_ui/components/Slot3.tscn" type="PackedScene" id=11]
-[ext_resource path="res://ui/main_ui/components/Slot4.tscn" type="PackedScene" id=12]
-[ext_resource path="res://ui/main_ui/components/Slot5.tscn" type="PackedScene" id=13]
-[ext_resource path="res://ui/main_ui/components/Slot6.tscn" type="PackedScene" id=14]
-[ext_resource path="res://ui/ui_components/Inventory.tscn" type="PackedScene" id=15]
-[ext_resource path="res://ui/main_ui/assets/inventory_button.png" type="Texture" id=16]
-[ext_resource path="res://ui/main_ui/assets/equipment_button.png" type="Texture" id=17]
-[ext_resource path="res://ui/main_ui/assets/stats_button.png" type="Texture" id=18]
-[ext_resource path="res://ui/main_ui/assets/settings_button.png" type="Texture" id=19]
+[ext_resource path="res://ui/main_ui/assets/inventory_button.png" type="Texture" id=8]
+[ext_resource path="res://ui/main_ui/components/Slot1.tscn" type="PackedScene" id=9]
+[ext_resource path="res://ui/main_ui/assets/ability_bar_icon_bg_primary.png" type="Texture" id=10]
+[ext_resource path="res://ui/main_ui/components/Slot2.tscn" type="PackedScene" id=11]
+[ext_resource path="res://ui/main_ui/components/Slot3.tscn" type="PackedScene" id=12]
+[ext_resource path="res://ui/main_ui/components/Slot4.tscn" type="PackedScene" id=13]
+[ext_resource path="res://ui/main_ui/components/Slot5.tscn" type="PackedScene" id=14]
+[ext_resource path="res://ui/main_ui/components/Slot6.tscn" type="PackedScene" id=15]
+[ext_resource path="res://ui/main_ui/assets/stats_button.png" type="Texture" id=16]
 
 [node name="main_ui" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -93,7 +90,7 @@ margin_top = 60.0
 margin_right = 296.0
 margin_bottom = 100.0
 
-[node name="ability_bar" type="MarginContainer" parent="."]
+[node name="center_bar" type="MarginContainer" parent="."]
 editor/display_folded = true
 anchor_left = 0.5
 anchor_top = 1.0
@@ -103,8 +100,8 @@ margin_left = -239.0
 margin_top = -84.0
 margin_right = 239.0
 
-[node name="NinePatchRect" type="NinePatchRect" parent="ability_bar"]
-margin_right = 478.0
+[node name="NinePatchRect" type="NinePatchRect" parent="center_bar"]
+margin_right = 576.0
 margin_bottom = 84.0
 size_flags_stretch_ratio = 1.05
 texture = ExtResource( 5 )
@@ -116,186 +113,133 @@ patch_margin_bottom = 4
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="ability_bar"]
-editor/display_folded = true
-margin_right = 478.0
+[node name="MarginContainer" type="MarginContainer" parent="center_bar"]
+margin_right = 576.0
 margin_bottom = 84.0
 custom_constants/margin_right = 10
 custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="bar" type="HBoxContainer" parent="ability_bar/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="center_bar/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
-margin_right = 468.0
+margin_right = 566.0
 margin_bottom = 74.0
 
-[node name="Slot_0" parent="ability_bar/MarginContainer/bar" instance=ExtResource( 8 )]
+[node name="Inventory_Button" type="TextureButton" parent="center_bar/MarginContainer/HBoxContainer"]
+margin_right = 64.0
+margin_bottom = 64.0
+hint_tooltip = "Inventory"
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 8 )
+
+[node name="VSeparator" type="VSeparator" parent="center_bar/MarginContainer/HBoxContainer"]
+margin_left = 68.0
+margin_right = 72.0
+margin_bottom = 64.0
+
+[node name="bar" type="HBoxContainer" parent="center_bar/MarginContainer/HBoxContainer"]
+editor/display_folded = true
+margin_left = 76.0
+margin_right = 480.0
+margin_bottom = 64.0
+
+[node name="Slot_0" parent="center_bar/MarginContainer/HBoxContainer/bar" instance=ExtResource( 9 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_right = 64.0
 margin_bottom = 64.0
-default_bg = ExtResource( 9 )
+default_bg = ExtResource( 10 )
 
-[node name="VSeparator" type="VSeparator" parent="ability_bar/MarginContainer/bar"]
-margin_left = 68.0
-margin_right = 118.0
-margin_bottom = 64.0
-custom_constants/separation = 50
-
-[node name="Slot_1" parent="ability_bar/MarginContainer/bar" groups=[
-"ability_slots",
-] instance=ExtResource( 10 )]
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 122.0
-margin_right = 186.0
-margin_bottom = 64.0
-slot_number = 1
-
-[node name="Slot_2" parent="ability_bar/MarginContainer/bar" groups=[
+[node name="Slot_1" parent="center_bar/MarginContainer/HBoxContainer/bar" groups=[
 "ability_slots",
 ] instance=ExtResource( 11 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 190.0
-margin_right = 254.0
+margin_left = 68.0
+margin_right = 132.0
 margin_bottom = 64.0
-slot_number = 2
+slot_number = 1
 
-[node name="Slot_3" parent="ability_bar/MarginContainer/bar" groups=[
+[node name="Slot_2" parent="center_bar/MarginContainer/HBoxContainer/bar" groups=[
 "ability_slots",
 ] instance=ExtResource( 12 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 258.0
-margin_right = 322.0
+margin_left = 136.0
+margin_right = 200.0
 margin_bottom = 64.0
-slot_number = 3
+slot_number = 2
 
-[node name="Slot_4" parent="ability_bar/MarginContainer/bar" groups=[
+[node name="Slot_3" parent="center_bar/MarginContainer/HBoxContainer/bar" groups=[
 "ability_slots",
 ] instance=ExtResource( 13 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 326.0
-margin_right = 390.0
+margin_left = 204.0
+margin_right = 268.0
 margin_bottom = 64.0
-slot_number = 4
+slot_number = 3
 
-[node name="Slot_5" parent="ability_bar/MarginContainer/bar" groups=[
+[node name="Slot_4" parent="center_bar/MarginContainer/HBoxContainer/bar" groups=[
 "ability_slots",
 ] instance=ExtResource( 14 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 394.0
-margin_right = 458.0
+margin_left = 272.0
+margin_right = 336.0
+margin_bottom = 64.0
+slot_number = 4
+
+[node name="Slot_5" parent="center_bar/MarginContainer/HBoxContainer/bar" groups=[
+"ability_slots",
+] instance=ExtResource( 15 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 340.0
+margin_right = 404.0
 margin_bottom = 64.0
 slot_number = 5
 
-[node name="Inventory_Panel" type="MarginContainer" parent="."]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -40.0
-margin_top = 366.0
-margin_bottom = 423.0
-grow_horizontal = 0
-grow_vertical = 0
-__meta__ = {
-"_edit_group_": true
-}
+[node name="VSeparator2" type="VSeparator" parent="center_bar/MarginContainer/HBoxContainer"]
+margin_left = 484.0
+margin_right = 488.0
+margin_bottom = 64.0
 
-[node name="NinePatchRect2" type="NinePatchRect" parent="Inventory_Panel"]
-margin_right = 40.0
-margin_bottom = 57.0
-size_flags_stretch_ratio = 1.05
-texture = ExtResource( 5 )
-region_rect = Rect2( 0, 0, 32, 32 )
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="Inventory_Margin" type="MarginContainer" parent="Inventory_Panel"]
-margin_right = 40.0
-margin_bottom = 57.0
-mouse_filter = 2
-custom_constants/margin_right = 10
-custom_constants/margin_top = 10
-custom_constants/margin_left = 10
-custom_constants/margin_bottom = 10
-
-[node name="Inventory" parent="Inventory_Panel/Inventory_Margin" instance=ExtResource( 15 )]
-margin_left = 10.0
-margin_top = 10.0
-margin_right = 30.0
-margin_bottom = 47.0
-grow_horizontal = 0
-grow_vertical = 2
-custom_constants/vseparation = 0
-custom_constants/hseparation = 0
-
-[node name="ButtonPanel" type="MarginContainer" parent="."]
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -298.0
-margin_top = -84.0
-
-[node name="NinePatchRect3" type="NinePatchRect" parent="ButtonPanel"]
-margin_right = 298.0
-margin_bottom = 84.0
-size_flags_stretch_ratio = 1.05
-texture = ExtResource( 5 )
-region_rect = Rect2( 0, 0, 32, 32 )
-patch_margin_left = 4
-patch_margin_top = 4
-patch_margin_right = 4
-patch_margin_bottom = 4
-axis_stretch_horizontal = 1
-axis_stretch_vertical = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="ButtonPanel"]
-margin_right = 298.0
-margin_bottom = 84.0
-custom_constants/margin_right = 14
-custom_constants/margin_top = 10
-custom_constants/margin_left = 14
-custom_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ButtonPanel/MarginContainer"]
-margin_left = 14.0
-margin_top = 10.0
-margin_right = 284.0
-margin_bottom = 74.0
-
-[node name="Inventory_Button" type="TextureButton" parent="ButtonPanel/MarginContainer/HBoxContainer"]
-margin_right = 64.0
+[node name="Stats" type="TextureButton" parent="center_bar/MarginContainer/HBoxContainer"]
+margin_left = 492.0
+margin_right = 556.0
 margin_bottom = 64.0
 texture_normal = ExtResource( 16 )
 
-[node name="Equipment" type="TextureButton" parent="ButtonPanel/MarginContainer/HBoxContainer"]
-margin_left = 68.0
-margin_right = 132.0
-margin_bottom = 64.0
-texture_normal = ExtResource( 17 )
+[node name="Center" type="MarginContainer" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -20.0
+margin_top = -20.0
+margin_right = 20.0
+margin_bottom = 20.0
 
-[node name="Stats" type="TextureButton" parent="ButtonPanel/MarginContainer/HBoxContainer"]
-margin_left = 136.0
-margin_right = 200.0
-margin_bottom = 64.0
-texture_normal = ExtResource( 18 )
+[node name="NinePatchRect4" type="NinePatchRect" parent="Center"]
+margin_right = 40.0
+margin_bottom = 40.0
+size_flags_stretch_ratio = 1.05
+texture = ExtResource( 5 )
+region_rect = Rect2( 0, 0, 32, 32 )
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
-[node name="Settings" type="TextureButton" parent="ButtonPanel/MarginContainer/HBoxContainer"]
-margin_left = 204.0
-margin_right = 268.0
-margin_bottom = 64.0
-texture_normal = ExtResource( 19 )
+[node name="Items" type="MarginContainer" parent="Center"]
+margin_right = 40.0
+margin_bottom = 40.0
 [connection signal="value_change" from="." to="bars/bars/Bars/life_bar" method="_on_main_ui_value_change"]
 [connection signal="value_change" from="." to="bars/bars/Bars/mp_bar" method="_on_main_ui_value_change"]
+[connection signal="pressed" from="center_bar/MarginContainer/HBoxContainer/Inventory_Button" to="." method="_on_Inventory_Button_pressed"]

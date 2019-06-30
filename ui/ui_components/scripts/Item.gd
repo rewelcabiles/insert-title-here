@@ -1,28 +1,16 @@
 extends TextureRect
 
-var itemIcon;
-var itemName;
-var itemSlot;
-var itemData;
-var picked = false;
+var itemIcon
+var itemName
+var itemSlot
+var itemData
 
-func _init(itemName, itemTexture, itemSlot, itemDesc):
-	name = itemName;
-	self.itemName = itemName;
-	texture = itemTexture;
-	hint_tooltip = "Name: %s\n\n %s" % [itemName, itemDesc];
-	self.itemSlot = itemSlot;
+func _init(item, slot_index):
+	itemData = item
+	name = itemData.name
+	texture = itemData.icon
+	itemName = itemData.name
+	hint_tooltip = "Name: %s\n\n %s" % [itemData.name, itemData.description]
+	itemSlot = slot_index
 	mouse_filter = Control.MOUSE_FILTER_PASS;
-	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND;
-	pass
-
-func pickItem():
-	mouse_filter = Control.MOUSE_FILTER_IGNORE;
-	picked = true;
-	pass
-
-func putItem():
-	rect_position = Vector2(0, 0);
-	mouse_filter = Control.MOUSE_FILTER_PASS;
-	picked = false;
-	pass
+	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND

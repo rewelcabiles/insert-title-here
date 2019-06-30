@@ -2,6 +2,8 @@ extends Node
 
 export(int) var gold = 0
 
+signal update
+
 var inventory = {}
 
 func _ready():
@@ -12,16 +14,12 @@ func get_slot(index):
 	return inventory[index]
 
 func remove_slot(index):
+	emit_signal("update")
 	inventory[index] = null
 
 func add_to_slot(item, x):
+	emit_signal("update")
 	inventory[x] = item
-
-func switch_slots(index_1, index_2):
-	var item1 = inventory[index_1]
-	var item2 = inventory[index_2]
-	inventory[index_1] = item2
-	inventory[index_2] = item1
 
 func get_first_empty_slot():
 	for index in range(inventory.size()):
@@ -32,6 +30,7 @@ func get_first_empty_slot():
 func add_to_first_empty_slot(item):
 	var pos = get_first_empty_slot()
 	if pos != null:
+		emit_signal("update")
 		add_to_slot(item, pos)
 
 func get_gold():

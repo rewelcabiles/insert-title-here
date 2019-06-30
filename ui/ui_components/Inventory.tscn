@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=2]
-
-[ext_resource path="res://ui/ui_components/scripts/Inventory.gd" type="Script" id=1]
-
-[node name="Inventory" type="GridContainer"]
-margin_right = 40.0
-margin_bottom = 40.0
-columns = 4
-script = ExtResource( 1 )

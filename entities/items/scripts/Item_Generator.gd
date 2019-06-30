@@ -16,13 +16,25 @@ func Create_Item(index):
 
 	if item_data.itemType == Type.Consumable:
 		new_item = Create_Consumable(item_data)
-
+	
+	if item_data.itemType == Type.Weapon:
+		new_item = Create_Weapon(item_data)
+	
 	return new_item
 
 func Create_Armour():
 	var pieces = ["head", "body", "legs", "left_ring", "right_ring", "shield"]
 	var new_armour = Armour_Object.new()
 
+func Create_Weapon(item_data):
+	var new_weapon = Consumable_Object.new()
+	new_weapon.type = item_data.itemType
+	new_weapon.name = item_data.itemName
+	new_weapon.description = item_data.itemDesc
+	new_weapon.icon = item_data.itemIcon
+	#new_weapon.buffs= item_data.itemBuffs
+	return new_weapon
+	
 func Create_Consumable(item_data):
 	var new_consumable = Consumable_Object.new()
 	new_consumable.type = item_data.itemType

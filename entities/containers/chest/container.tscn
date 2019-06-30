@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://entities/containers/chest/scripts/container.gd" type="Script" id=1]
 [ext_resource path="res://entities/containers/chest/sprites/chest_01.png" type="Texture" id=2]
+[ext_resource path="res://entities/common/components/Inventory.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8, 7 )
@@ -16,3 +17,5 @@ texture = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1 )
 shape = SubResource( 1 )
+
+[node name="Inventory" parent="." instance=ExtResource( 3 )]

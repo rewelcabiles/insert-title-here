@@ -19,6 +19,9 @@ func _ready():
 	main_ui.player = self
 	remove_child($main_ui)
 
+func open_container_ui(other_inventory):
+	main_ui
+
 func _physics_process(delta):
 	var intersections
 

@@ -37,7 +37,6 @@ func set_character(character):
 		player.sprite.IS_PLAYER = false
 		player.sprite.set_animation("default")
 	player.sprite = character
-	player.main_ui.get_node("Inventory_Panel/Inventory_Margin/Inventory").setup_inventory_menu(player.sprite)
 	player.sprite.IS_PLAYER = true
 	player.sprite.set_animation("default")
 	player.sprite.start_animation()

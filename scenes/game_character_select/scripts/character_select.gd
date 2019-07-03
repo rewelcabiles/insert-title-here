@@ -40,9 +40,14 @@ func set_character(character):
 	player.sprite.IS_PLAYER = true
 	player.sprite.set_animation("default")
 	player.sprite.start_animation()
-
+	player.sprite.connect("container_opened", player, "open_container_ui")
+	player.sprite.connect("container_closed", player, "close_container_ui")
+	player.sprite.connect("moving_scene", player.main_ui, "_set_menu")
+	player.sprite.stats.connect("stat_updated", player, "update_ui")
 	camera = get_parent().get_node("camera")
 	camera.set_follower(player.sprite)
+	player.main_ui.clear_container_windows()
+	player.update_ui()
 	#camera.align()
 
 func _on_to_exit_entity_entered(body, to_node):

@@ -37,7 +37,7 @@ func activate(caster, location):
 
 func _on_primary_magic_body_entered(body):
 	if not body.get("stats") == null:
-		body.stats.take_damage(damage)
+		pass
 	speed = 100
 	$sprite.play()
 

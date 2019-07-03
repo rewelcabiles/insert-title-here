@@ -2,53 +2,80 @@ extends CanvasLayer
 
 export(int) var life_bar setget set_lifebar_hp
 export(int) var mana_bar setget set_manabar_mp
-export(int) var strength setget set_strength
-export(int) var magic setget set_magic
-export(int) var agility setget set_agility
+
+onready var items_window = get_node("TopLeft/Items")
 
 var player
-var inventory_open = false
+var menus = {
+	"current" : null,
+	"inventory" : load("res://ui/ui_components/inventory.tscn"),
+	"equipment" : load("res://ui/ui_components/equipment.tscn")
+}
 
-signal value_change
+var open_container_menus = []
 
-func _ready():
-	pass
 
-func set_strength(new_num):
-	get_node("MarginContainer/TopLeft/Stats/strength/NinePatchRect/Label").text = str(new_num)
-	
-func set_magic(new_num):
-	get_node("MarginContainer/TopLeft/Stats/magic/NinePatchRect/Label").text = str(new_num)
-	
-func set_agility(new_num):
-	get_node("MarginContainer/TopLeft/Stats/agility/NinePatchRect/Label").text = str(new_num)
 
 func set_manabar_mp(new_num):
-	get_node("bars/bars/Bars/mp_bar").update_bar_number(new_num)
+	get_node("TopLeft/Bars/bars/Bars/mp_bar").update_bar_number(new_num)
 	
 func set_lifebar_hp(new_num):
-	get_node("bars/bars/Bars/life_bar").update_bar_number(new_num)
+	get_node("TopLeft/Bars/bars/Bars/life_bar").update_bar_number(new_num)
 	
-func set_slot(slot, texture):
-	get_node("ability_bar/bar/slot_"+str(slot)).set_slot(texture)
-
 func select_slot(slot):
 	get_tree().call_group("ability_slots", "toggle_select", int(slot))
-
-func reset_center():
-	for child in get_node("Center").get_children():
-		child.queue_free()
-	get_node("Center").visible = false
 		
 func _on_Inventory_Button_pressed():
-	reset_center()
-	get_node("Center").visible = true
-	if inventory_open == false:
-		var inventory_menu = load("res://ui/ui_components/inventory.tscn").instance()
-		inventory_menu.initialize_container(player.sprite.inventory)
-		get_node("Center").add_child(inventory_menu)
-		inventory_open = true
-	if inventory_open == true:
-		inventory_open = false
-	
-	
+	var window = window_is_open("Inventory")
+	if window == null:
+		var inv = create_container_window(player.sprite.inventory, "Inventory")
+		items_window.move_child(inv, 0)
+	else:
+		close_container_window(window.name)
+	window = window_is_open("Equipment")
+	if window == null:
+		var new_window = menus["equipment"].instance()
+		new_window.equipment = player.sprite.equipment
+		open_container_menus.append(new_window)
+		items_window.add_child(new_window)
+	else:
+		close_container_window(window.name)
+
+func _on_container_open(container):
+	if window_is_open("Inventory") == null:
+		var inv = create_container_window(player.sprite.inventory, "Inventory")
+		items_window.move_child(inv, 0)
+	var window = window_is_open(container.name)
+	if window == null:
+		var con = create_container_window(container.inventory, container.name)
+		connect("remove_from_container_accessed", container, "remove_from_accessed")
+	else:
+		close_container_window(window.name)
+
+func window_is_open(window_name):
+	for window in open_container_menus:
+		if window.name == window_name:
+			return window
+	return null
+
+signal remove_from_container_accessed
+
+func close_container_window(window_name):
+	for window in open_container_menus:
+		if window.name == window_name:
+			items_window.remove_child(window)
+			open_container_menus.remove(open_container_menus.find(window))
+			emit_signal("remove_from_container_accessed", player.sprite)
+			
+func clear_container_windows():
+	for window in open_container_menus:
+		close_container_window(window.name)
+
+func create_container_window(container_inventory, container_name):
+	var new_window = menus["inventory"].instance()
+	new_window.connect("close_window", self, "close_container_window")
+	new_window.initialize_container(container_inventory, container_name)
+	new_window.name = container_name
+	open_container_menus.append(new_window)
+	items_window.add_child(new_window)
+	return new_window

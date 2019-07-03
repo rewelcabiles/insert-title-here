@@ -30,6 +30,8 @@ Item_Generator="*res://entities/items/scripts/Item_Generator.gd"
 
 window/size/width=1920
 window/size/height=1080
+window/stretch/mode="viewport"
+window/stretch/aspect="keep_width"
 
 [editor_plugins]
 
@@ -116,6 +118,7 @@ activate_primary={
 2d_physics/layer_2="player"
 2d_physics/layer_3="doors"
 2d_physics/layer_4="spells"
+2d_physics/layer_5="props"
 
 [rendering]
 

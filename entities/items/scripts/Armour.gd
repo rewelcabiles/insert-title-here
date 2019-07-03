@@ -6,3 +6,6 @@ var stat_bonus = []
 
 func on_use(user):
 	pass
+	
+func on_equip():
+	pass

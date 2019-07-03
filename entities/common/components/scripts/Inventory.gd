@@ -1,13 +1,15 @@
 extends Node
 
 export(int) var gold = 0
+export(int) var slots = 10
+var inventory = {}
 
 signal update
 
-var inventory = {}
+
 
 func _ready():
-	for i in range(20):
+	for i in range(slots):
 		inventory[i] = null
 
 func get_slot(index):

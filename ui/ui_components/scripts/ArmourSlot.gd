@@ -2,21 +2,16 @@ extends TextureRect
 
 var slotIndex;
 var itemHolder = null;
-export(Global.ITEM) var holds_type = Global.ITEM.ALL
-export(Global.ARMOUR_TYPE) var armour_type
+var holds_type = Global.ITEM.ARMOUR
 
 signal slot_update
 
-func _ready():
-	#self.slotIndex = slotIndex;
-	#name = "ItemSlot_%d" % slotIndex
+func _init(slotIndex):
+	self.slotIndex = slotIndex;
+	name = "ItemSlot_%d" % slotIndex
 	texture = preload("res://ui/main_ui/assets/ability_bar_icon_bg.png");
 	mouse_filter = Control.MOUSE_FILTER_PASS;
 	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND;
-
-func initialize(slotIndex):
-	self.slotIndex = slotIndex;
-	name = "ItemSlot_%d" % slotIndex
 
 func get_drag_data(position):
 	get_parent().set_drag_preview(itemHolder)
@@ -26,11 +21,7 @@ func get_drag_data(position):
 
 func can_drop_data(position, slot):
 	var item_type = slot.itemHolder.itemData.type
-	print(item_type)
-	print(holds_type)
-	if holds_type == Global.ITEM.ALL:
-		return true
-	elif item_type == holds_type:
+	if item_type == Global.ITEM.ARMOUR:
 		return true
 
 func drop_data(position, data):

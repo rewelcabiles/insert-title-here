@@ -9,4 +9,4 @@ ability_book = ExtResource( 2 )
 
 [node name="sprite" parent="." index="0"]
 frames = ExtResource( 3 )
-frame = 1
+frame = 2

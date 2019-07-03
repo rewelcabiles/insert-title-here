@@ -14,32 +14,38 @@ func Create_Item(index):
 	var new_item
 	var item_data = Database.ItemDatabase[index]
 
-	if item_data.itemType == Type.Consumable:
+	if item_data.type == Global.ITEM.CONSUME:
 		new_item = Create_Consumable(item_data)
 	
-	if item_data.itemType == Type.Weapon:
+	if item_data.type == Global.ITEM.WEAPON:
 		new_item = Create_Weapon(item_data)
 	
 	return new_item
 
-func Create_Armour():
-	var pieces = ["head", "body", "legs", "left_ring", "right_ring", "shield"]
+func Create_Armour(item_data):
 	var new_armour = Armour_Object.new()
-
+	new_armour.type = item_data.type
+	new_armour.name = item_data.name
+	new_armour.description = item_data.description
+	new_armour.icon = item_data.icon
+	new_armour.armour_points = item_data.armour_point
+	new_armour.stat_bonus = item_data.stat_bonus
+	new_armour.armour_type = item_data.armour_type
+	
 func Create_Weapon(item_data):
 	var new_weapon = Consumable_Object.new()
-	new_weapon.type = item_data.itemType
-	new_weapon.name = item_data.itemName
-	new_weapon.description = item_data.itemDesc
-	new_weapon.icon = item_data.itemIcon
-	#new_weapon.buffs= item_data.itemBuffs
+	new_weapon.type = item_data.type
+	new_weapon.name = item_data.name
+	new_weapon.description = item_data.description
+	new_weapon.icon = item_data.icon
+	
 	return new_weapon
 	
 func Create_Consumable(item_data):
 	var new_consumable = Consumable_Object.new()
-	new_consumable.type = item_data.itemType
-	new_consumable.name = item_data.itemName
-	new_consumable.description = item_data.itemDesc
-	new_consumable.icon = item_data.itemIcon
-	new_consumable.buffs= item_data.itemBuffs
+	new_consumable.type = item_data.type
+	new_consumable.name = item_data.name
+	new_consumable.description = item_data.description
+	new_consumable.icon = item_data.icon
+	new_consumable.buffs= item_data.buffs
 	return new_consumable

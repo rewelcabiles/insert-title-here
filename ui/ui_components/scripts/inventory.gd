@@ -4,29 +4,39 @@ var SlotObject = preload("res://ui/ui_components/scripts/ItemSlot.gd")
 var ItemObject = preload("res://ui/ui_components/scripts/Item.gd")
 
 var inventory
+var SlotList
+var instance
 
-var SlotList = {}
-
-func _ready():
-	pass
-
-func initialize_container(inv):
+func initialize_container(inv, inv_name):
+	var label = get_node("MarginContainer/VBoxContainer/HBoxContainer/Label")
+	var grid  = get_node("MarginContainer/VBoxContainer/GridContainer")
+	label.text = inv_name
 	inventory = inv
-	#inventory.connect("update", self, "update_container")
+	SlotList = {}
+	
+	for child in grid.get_children():
+		child.queue_free()
+		
 	for index in range(inventory.inventory.size()):
-		var new_slot = SlotObject.new(index)
+		var new_slot = SlotObject.new()
+		new_slot.slotIndex = index
 		new_slot.connect("slot_update", self, "update_inventory")
 		SlotList[index] = new_slot
-		get_node("GridContainer").add_child(new_slot)
+		grid.add_child(new_slot)
 	update_container()
 	
 func update_container():
 	for index in range(inventory.inventory.size()):
 		if inventory.inventory[index]:
-			var new_item = ItemObject.new(inventory.inventory[index], index)
-			SlotList[index].setItem(new_item)
+			var itemHolder = ItemObject.new(inventory.inventory[index], index)
+			SlotList[index].setItem(itemHolder)
 			
 func update_inventory(index):
 	var slot = SlotList[index]
-	var item = null if slot.item == null else slot.item
+	var item = null if slot.itemHolder == null else slot.itemHolder.itemData
 	inventory.add_to_slot(item, index)
+
+signal close_window
+
+func _on_close_pressed():
+	emit_signal("close_window", name)

@@ -19,12 +19,14 @@ func _ready():
 	main_ui.player = self
 	remove_child($main_ui)
 
-func open_container_ui(other_inventory):
-	main_ui
+func open_container_ui(container):
+	main_ui._on_container_open(container)
+
+func close_container_ui(container):
+	main_ui.close_container_window(container.name)
 
 func _physics_process(delta):
 	var intersections
-
 	if sprite:
 		var x2 = get_parent().get_global_mouse_position()
 		var r= selectable_distance*(x2-sprite.position).normalized() + sprite.position
@@ -33,7 +35,6 @@ func _physics_process(delta):
 		intersections = state.intersect_ray(sprite.position, r, [sprite], sprite.collision_mask,true, true)
 		if not intersections:
 			if previous_highlight and is_instance_valid(previous_highlight):
-				print("Resetting highlights")
 				previous_highlight.modulate = Color(1, 1, 1)
 				previous_highlight = null
 			else:
@@ -60,6 +61,9 @@ func _unhandled_input(event):
 		if event is InputEventMouseButton:
 			if event.button_index == BUTTON_LEFT and event.pressed:
 				do_interact = true
+				
+func _input(event):
+	if sprite:
 
 		if Input.is_action_pressed("ui_right"):
 			sprite.movement.RIGHT = true
@@ -94,15 +98,6 @@ func _unhandled_input(event):
 			sprite.select_skill(4)
 			$main_ui.select_slot(4)
 
-
-func _process(delta):
-	if sprite:
-		set_ui_info()
-
-func set_ui_info():
-	$main_ui.set_strength(sprite.strength)
-	$main_ui.set_magic(sprite.magic)
-	$main_ui.set_agility(sprite.agility)
-	$main_ui.set_lifebar_hp(sprite.health/sprite.max_health * 100)
-	$main_ui.set_manabar_mp(sprite.mana/sprite.max_mana * 100)
-	#$main_ui.get_node("Inventory_Panel/Inventory_Margin/Inventory").setup_inventory_menu(sprite)
+func update_ui():
+	$main_ui.set_lifebar_hp(sprite.stats.health/sprite.stats.max_health * 100)
+	$main_ui.set_manabar_mp(sprite.stats.mana/sprite.stats.max_mana * 100)

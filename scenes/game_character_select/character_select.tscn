@@ -7,10 +7,10 @@
 [ext_resource path="res://entities/doors/sprites/door_1.png" type="Texture" id=5]
 [ext_resource path="res://ui/ui_resources/animated_fonts/animated_font.tscn" type="PackedScene" id=6]
 [ext_resource path="res://ui/fonts/m3x6.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://entities/warrior/warrior.tscn" type="PackedScene" id=8]
-[ext_resource path="res://entities/elf/elf.tscn" type="PackedScene" id=9]
-[ext_resource path="res://entities/wizard/wizard.tscn" type="PackedScene" id=10]
-[ext_resource path="res://entities/containers/chest/container.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entities/containers/chest/container.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entities/warrior/warrior.tscn" type="PackedScene" id=9]
+[ext_resource path="res://entities/elf/elf.tscn" type="PackedScene" id=10]
+[ext_resource path="res://entities/wizard/wizard.tscn" type="PackedScene" id=11]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -67,25 +67,20 @@ margin_bottom = -294.0
 custom_fonts/font = SubResource( 1 )
 text = "Select A Character!"
 
-[node name="warrior" parent="." instance=ExtResource( 8 )]
+[node name="container" parent="." instance=ExtResource( 8 )]
+position = Vector2( 24, -145 )
+
+[node name="warrior" parent="." instance=ExtResource( 9 )]
 position = Vector2( -86, -1 )
-collision_mask = 5
-speed = 250
+collision_mask = 21
 
-[node name="elf" parent="." instance=ExtResource( 9 )]
+[node name="elf" parent="." instance=ExtResource( 10 )]
 position = Vector2( 27, -4 )
-collision_mask = 5
-max_mana = 10
-mana = 10
-strength = 5
-magic = 5
-agility = 5
-speed = 250
+collision_mask = 21
 
-[node name="wizard" parent="." instance=ExtResource( 10 )]
+[node name="wizard" parent="." instance=ExtResource( 11 )]
 position = Vector2( 162, -4 )
-collision_mask = 5
-speed = 250
+collision_mask = 21
 
 [node name="Warrior" parent="." instance=ExtResource( 6 )]
 margin_left = 210.0
@@ -93,12 +88,8 @@ margin_top = -280.0
 margin_right = 245.0
 margin_bottom = -249.0
 text = "Exit"
-
-[node name="container" parent="." instance=ExtResource( 11 )]
-position = Vector2( 24, -145 )
 [connection signal="entity_entered" from="to_exit" to="." method="_on_to_exit_entity_entered" flags=6]
 [connection signal="entity_entered" from="to_start_game" to="." method="_on_to_start_game_entity_entered" flags=6]
 [connection signal="input_event" from="warrior" to="." method="_on_warrior_input_event"]
-[connection signal="mouse_entered" from="warrior" to="." method="_on_warrior_mouse_entered"]
 [connection signal="input_event" from="elf" to="." method="_on_elf_input_event"]
 [connection signal="input_event" from="wizard" to="." method="_on_wizard_input_event"]

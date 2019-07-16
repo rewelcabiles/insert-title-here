@@ -41,5 +41,4 @@ func _on_primary_magic_body_entered(body):
 		$sprite.play()
 
 func _on_limit_timeout():
-	print("TIMEOUT")
 	$sprite.play()

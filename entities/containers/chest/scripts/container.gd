@@ -8,7 +8,6 @@ export(Texture) var open_sprite = load("res://entities/containers/chest/sprites/
 onready var sprite = $sprite
 onready var inventory = $Inventory
 
-signal opened
 
 var accessed_by = []
 
@@ -32,3 +31,9 @@ func _on_Access_Area_body_exited(body):
 
 func remove_from_accessed(body):
 	accessed_by.remove(accessed_by.find(body))
+
+func _on_container_clicked(viewport, event, shape_idx):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.pressed:
+			get_tree().set_input_as_handled()
+			interacted_by(Global.PLAYER.sprite)

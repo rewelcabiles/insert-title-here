@@ -1,0 +1,336 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://entities/items/sprites/sword_01.png" type="Texture" id=1]
+[ext_resource path="res://spot.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+signal hit
+signal attack_finished
+signal combo_window
+signal combow_window_finished
+var attack_owner
+
+export(Texture) var sprite setget set_sprite
+
+func set_sprite(new_sprite):
+	$Area2D/Sprite.texture = new_sprite
+	
+func _physics_process(delta):
+	position = attack_owner.position
+
+func activate(parent, location):
+	attack_owner = parent
+	var spawn = attack_owner.position
+	print((location-spawn))
+	var direction = (location - spawn).normalized()
+	print(direction)
+	if direction.x < 0:
+		scale.x = -1
+	else:
+		rotation = direction.angle()
+	position = spawn
+	
+	$Area2D/AnimationPlayer.play()
+
+func on_Hit(body):
+	if body != attack_owner:
+		knockback(body)
+		emit_signal(\"hit\", body)
+
+func on_combo_window(): 
+	emit_signal(\"combo_window\")
+
+func on_combo_window_finished():
+	emit_signal(\"combow_window_finished\")
+
+func enable_monitoring():
+	$Area2D.monitoring = true
+	
+func disable_monitoring():
+	$Area2D.monitoring = false
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	emit_signal(\"attack_finished\", get_parent())
+
+func knockback(body):
+	var knockback_amount = 1000
+	var x = 0
+	var y = 0
+	if body.position.x > position.x:
+		x = knockback_amount
+	if body.position.x < position.x:
+		x = -knockback_amount
+	if body.position.y > position.y:
+		y = knockback_amount
+	if body.position.y < position.y:
+		y = -knockback_amount
+	body.movement.velocity += Vector2(x, y)"
+
+[sub_resource type="ShaderMaterial" id=2]
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 38.0048, 4.94975 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "1"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -88.4541, 90.0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 35, -26 ), Vector2( -3, -44 ), Vector2( 35, 36 ), Vector2( 26, 29 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3, 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable_monitoring"
+}, {
+"args": [  ],
+"method": "on_combo_window"
+}, {
+"args": [  ],
+"method": "on_combo_window_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("spot:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("spot:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.5, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4.39461, -9.55072 ), Vector2( 31.2552, -35.55 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "2"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 90.0, 44.4437, 44.4437, 44.4437 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 35, 36 ), Vector2( -10, 19 ), Vector2( 70, 15 ), Vector2( 13, 16 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3, 0.5, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable_monitoring"
+}, {
+"args": [  ],
+"method": "disable_monitoring"
+}, {
+"args": [  ],
+"method": "on_combo_window"
+}, {
+"args": [  ],
+"method": "on_combo_window_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("spot:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("spot:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 5.18946, -10.1954 ), Vector2( 31.8881, -37.0793 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "3"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 45.3851, 44.4437, 44.4437, 45.4198 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 48, 14 ), Vector2( -10, 19 ), Vector2( 128, 17 ), Vector2( 28, 15 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3, 0.5, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "enable_monitoring"
+}, {
+"args": [  ],
+"method": "disable_monitoring"
+}, {
+"args": [  ],
+"method": "on_combo_window"
+}, {
+"args": [  ],
+"method": "on_combo_window_finished"
+} ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("spot:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("spot:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 6.72467, -10.8853 ), Vector2( 32.6335, -37.4112 ) ]
+}
+
+[node name="Sword" type="Node2D"]
+position = Vector2( -12, 5 )
+script = SubResource( 1 )
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2( 26, 29 )
+rotation = 1.5708
+monitoring = false
+collision_layer = 8
+collision_mask = 32
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+material = SubResource( 2 )
+position = Vector2( 9.66773, -18.3914 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="HitBox" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 12.7984, -17.5447 )
+rotation = -0.791986
+shape = SubResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Area2D"]
+autoplay = "1"
+playback_speed = 2.0
+anims/1 = SubResource( 4 )
+anims/2 = SubResource( 5 )
+anims/3 = SubResource( 6 )
+
+[node name="spot" type="Sprite" parent="Area2D"]
+visible = false
+position = Vector2( 31.2552, -35.55 )
+rotation = -1.09373
+scale = Vector2( 0.213979, 0.219329 )
+texture = ExtResource( 2 )
+[connection signal="body_entered" from="Area2D" to="." method="on_Hit"]
+[connection signal="animation_finished" from="Area2D/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

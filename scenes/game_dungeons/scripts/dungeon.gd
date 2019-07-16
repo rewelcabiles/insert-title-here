@@ -17,6 +17,7 @@ func _ready():
 	char_select_node.connect("goto_dungeon", self, "start_game")
 	char_select_node.connect("goto_main_menu", self, "_go_to_menu")
 	transition.connect("halfway",self,"_on_transition_halfway")
+	Global.PLAYER = $Player
 	add_child(char_select_node)
 
 func _go_to_menu():
@@ -50,9 +51,20 @@ func transition_entity(target_entity, connected_door_object):
 	connected_door_object.get_parent().add_child(target_entity)
 	var tm = target_entity.get_parent()._get_tile_map()
 	var temp_pos = tm.world_to_map(connected_door_object.position / 4)
-	target_entity.set_position(tm.map_to_world(temp_pos + connected_door_object._get_offset()) * 4)
+	target_entity.set_position(tm.map_to_world(temp_pos + _get_offset(connected_door_object)) * 4)
 
 func _on_transition_halfway():
 	if $camera:
 		$camera.pause = false
 
+func _get_offset(door_object):
+	var offset = 1
+	match door_object.facing:
+		Global.NORTH: 
+			return Vector2(0, offset)
+		Global.SOUTH:
+			return Vector2(0, -offset)
+		Global.EAST:
+			return Vector2(-offset, 0)
+		Global.WEST:
+			return Vector2(offset, 0)

@@ -2,7 +2,8 @@
 
 [ext_resource path="res://entities/containers/chest/scripts/container.gd" type="Script" id=1]
 [ext_resource path="res://entities/containers/chest/sprites/chest_01.png" type="Texture" id=2]
-[ext_resource path="res://entities/common/components/Inventory.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/characters/default/components/Inventory.tscn" type="PackedScene" id=3]
+
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 21.5015
@@ -12,6 +13,7 @@ extents = Vector2( 7, 5.25 )
 
 [node name="container" type="StaticBody2D"]
 scale = Vector2( 4, 4 )
+input_pickable = true
 collision_layer = 16
 collision_mask = 2
 script = ExtResource( 1 )
@@ -32,5 +34,6 @@ shape = SubResource( 2 )
 
 [node name="Inventory" parent="." instance=ExtResource( 3 )]
 slots = 4
+[connection signal="input_event" from="." to="." method="_on_container_clicked"]
 [connection signal="body_exited" from="Access_Area" to="." method="_on_Access_Area_body_exited"]
 [connection signal="body_shape_exited" from="Access_Area" to="." method="_on_Access_Area_body_shape_exited"]

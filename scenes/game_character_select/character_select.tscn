@@ -1,20 +1,19 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/game_character_select/scripts/character_select.gd" type="Script" id=1]
 [ext_resource path="res://scenes/game_character_select/dungeon_tiles.tscn" type="PackedScene" id=2]
-[ext_resource path="res://entities/doors/Door.tscn" type="PackedScene" id=3]
-[ext_resource path="res://entities/doors/sprites/door_3.png" type="Texture" id=4]
-[ext_resource path="res://entities/doors/sprites/door_1.png" type="Texture" id=5]
-[ext_resource path="res://ui/ui_resources/animated_fonts/animated_font.tscn" type="PackedScene" id=6]
-[ext_resource path="res://ui/fonts/m3x6.ttf" type="DynamicFontData" id=7]
-[ext_resource path="res://entities/containers/chest/container.tscn" type="PackedScene" id=8]
-[ext_resource path="res://entities/warrior/warrior.tscn" type="PackedScene" id=9]
-[ext_resource path="res://entities/elf/elf.tscn" type="PackedScene" id=10]
-[ext_resource path="res://entities/wizard/wizard.tscn" type="PackedScene" id=11]
+[ext_resource path="res://entities/interactable_objects/door/door_object.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/ui_resources/animated_fonts/animated_font.tscn" type="PackedScene" id=4]
+[ext_resource path="res://ui/fonts/m3x6.ttf" type="DynamicFontData" id=5]
+[ext_resource path="res://entities/warrior/warrior.tscn" type="PackedScene" id=6]
+[ext_resource path="res://entities/elf/elf.tscn" type="PackedScene" id=7]
+[ext_resource path="res://entities/wizard/wizard.tscn" type="PackedScene" id=8]
+[ext_resource path="res://entities/interactable_objects/container/container_object.tscn" type="PackedScene" id=9]
+[ext_resource path="res://entities/characters/test/character.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
-font_data = ExtResource( 7 )
+font_data = ExtResource( 5 )
 
 [node name="character_select" type="Node2D"]
 script = ExtResource( 1 )
@@ -42,17 +41,13 @@ cell_y_sort = true
 collision_layer = 2
 tile_data = PoolIntArray( -196611, 1, 0, -196610, 1, 0, -196609, 1, 0, -262144, 1, 0, -262143, 1, 0, -262142, 1, 0, -262141, 1, 0, -262140, 1, 0, -262139, 1, 0, -262138, 1, 0, -262137, 1, 0, -262136, 1, 0, -131075, 1, 0, -65539, 1, 0, -65538, 4, 0, -65537, 4, 1, -131072, 4, 1, -131071, 4, 1, -131070, 4, 1, -131069, 4, 1, -131068, 4, 1, -131067, 4, 1, -131066, 4, 1, -131065, 4, 2, -131064, 1, 0, -3, 1, 65536, -2, 4, 65536, -1, 4, 65537, -65536, 4, 65537, -65535, 4, 65537, -65534, 4, 65537, -65533, 4, 65537, -65532, 4, 65537, -65531, 4, 65537, -65530, 4, 65537, -65529, 4, 65538, -65528, 1, 65538, 65533, 1, 65536, 65534, 4, 65536, 65535, 4, 65537, 0, 4, 65537, 1, 4, 65537, 2, 4, 65537, 3, 4, 65537, 4, 4, 65537, 5, 4, 65537, 6, 4, 65537, 7, 4, 65538, 8, 1, 65538, 131069, 1, 65536, 131070, 4, 65536, 131071, 4, 65537, 65536, 4, 65537, 65537, 4, 65537, 65538, 4, 65537, 65539, 4, 65537, 65540, 4, 65537, 65541, 4, 65537, 65542, 4, 65537, 65543, 4, 65538, 65544, 1, 65538, 196605, 1, 65536, 196606, 4, 65536, 196607, 4, 65537, 131072, 4, 65537, 131073, 4, 65537, 131074, 4, 65537, 131075, 4, 65537, 131076, 4, 65537, 131077, 4, 65537, 131078, 4, 65537, 131079, 4, 65538, 131080, 1, 65538, 262141, 1, 65536, 262142, 4, 65536, 262143, 4, 65537, 196608, 4, 65537, 196609, 4, 65537, 196610, 4, 65537, 196611, 4, 65537, 196612, 4, 65537, 196613, 4, 65537, 196614, 4, 65537, 196615, 4, 65538, 196616, 1, 65538, 327677, 1, 65536, 327678, 4, 65536, 327679, 4, 65537, 262144, 4, 65537, 262145, 4, 65537, 262146, 4, 65537, 262147, 4, 65537, 262148, 4, 65537, 262149, 4, 65537, 262150, 4, 65537, 262151, 4, 65538, 262152, 1, 65538, 393213, 1, 65536, 393214, 4, 131072, 393215, 4, 131073, 327680, 4, 131073, 327681, 4, 131073, 327682, 4, 131073, 327683, 4, 131073, 327684, 4, 131073, 327685, 4, 131073, 327686, 4, 131073, 327687, 4, 131074, 327688, 1, 65538, 458749, 1, 131072, 458750, 1, 131073, 458751, 1, 131073, 393216, 1, 131073, 393217, 1, 131073, 393218, 1, 131073, 393219, 1, 131073, 393220, 1, 131073, 393221, 1, 131073, 393222, 1, 131073, 393223, 1, 131073, 393224, 1, 131074 )
 
-[node name="to_exit" parent="." instance=ExtResource( 3 )]
-position = Vector2( 224, -241 )
-scale = Vector2( 4, 4 )
-sprite = ExtResource( 4 )
+[node name="door_exit" parent="." instance=ExtResource( 3 )]
+position = Vector2( 224, -239 )
 
-[node name="to_start_game" parent="." instance=ExtResource( 3 )]
-position = Vector2( -160, -241 )
-scale = Vector2( 4, 4 )
-sprite = ExtResource( 5 )
+[node name="door_start" parent="." instance=ExtResource( 3 )]
+position = Vector2( -160, -239 )
 
-[node name="text_start" parent="." instance=ExtResource( 6 )]
+[node name="text_start" parent="." instance=ExtResource( 4 )]
 margin_left = -184.0
 margin_top = -280.0
 margin_right = -134.0
@@ -67,29 +62,32 @@ margin_bottom = -294.0
 custom_fonts/font = SubResource( 1 )
 text = "Select A Character!"
 
-[node name="container" parent="." instance=ExtResource( 8 )]
-position = Vector2( 24, -145 )
-
-[node name="warrior" parent="." instance=ExtResource( 9 )]
+[node name="warrior" parent="." instance=ExtResource( 6 )]
 position = Vector2( -86, -1 )
-collision_mask = 21
 
-[node name="elf" parent="." instance=ExtResource( 10 )]
+[node name="elf" parent="." instance=ExtResource( 7 )]
 position = Vector2( 27, -4 )
-collision_mask = 21
 
-[node name="wizard" parent="." instance=ExtResource( 11 )]
+[node name="wizard" parent="." instance=ExtResource( 8 )]
 position = Vector2( 162, -4 )
-collision_mask = 21
+collision_mask = 53
 
-[node name="Warrior" parent="." instance=ExtResource( 6 )]
+[node name="Warrior" parent="." instance=ExtResource( 4 )]
 margin_left = 210.0
 margin_top = -280.0
 margin_right = 245.0
 margin_bottom = -249.0
 text = "Exit"
-[connection signal="entity_entered" from="to_exit" to="." method="_on_to_exit_entity_entered" flags=6]
-[connection signal="entity_entered" from="to_start_game" to="." method="_on_to_start_game_entity_entered" flags=6]
+
+[node name="Container" parent="." instance=ExtResource( 9 )]
+position = Vector2( -5, 244 )
+
+[node name="character" parent="." instance=ExtResource( 10 )]
+position = Vector2( -128, 192 )
+scale = Vector2( 2, 2 )
+[connection signal="entity_entered" from="door_exit" to="." method="_on_to_exit_entity_entered"]
+[connection signal="entity_entered" from="door_start" to="." method="_on_to_start_game_entity_entered"]
 [connection signal="input_event" from="warrior" to="." method="_on_warrior_input_event"]
 [connection signal="input_event" from="elf" to="." method="_on_elf_input_event"]
 [connection signal="input_event" from="wizard" to="." method="_on_wizard_input_event"]
+[connection signal="input_event" from="character" to="." method="_on_character_input_event"]

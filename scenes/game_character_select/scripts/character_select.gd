@@ -12,7 +12,6 @@ func _ready():
 	wizard = $wizard
 	warrior = $warrior
 	elf = $elf
-	camera = $camera
 
 func _on_elf_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.button_index == BUTTON_LEFT \
@@ -29,6 +28,12 @@ func _on_wizard_input_event(viewport, event, shape_idx):
 	and event.button_index == BUTTON_LEFT \
 	and event.is_pressed():
 		set_character(wizard)
+
+func _on_character_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton \
+	and event.button_index == BUTTON_LEFT \
+	and event.is_pressed():
+		set_character($character)
 
 func set_character(character):
 	var player = get_parent().get_node("Player")
@@ -53,8 +58,9 @@ func set_character(character):
 func _on_to_exit_entity_entered(body, to_node):
 	emit_signal("goto_main_menu")
 
-func _on_to_start_game_entity_entered(body, connected_door):
+func _on_to_start_game_entity_entered(body, to_node):
 	var player = get_parent().get_node("Player")
 	remove_child(player.sprite)
 	emit_signal("goto_dungeon")
+	
 

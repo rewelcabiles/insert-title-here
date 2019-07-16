@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://ui/ui_components/equipment_ui.tscn" type="PackedScene" id=1]
+[ext_resource path="res://ui/ui_components/inventory_ui.tscn" type="PackedScene" id=2]
+[ext_resource path="res://ui/ui_components/character_stats_ui.tscn" type="PackedScene" id=3]
+[ext_resource path="res://ui/ui_components/sprite/close_x.png" type="Texture" id=4]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Node2D
+
+var character :Character
+
+signal close_window
+
+func set_child_info():
+	$Equipment.equipment = character.equipment
+	$Inventory.initialize_container(character.inventory, \"Inventory\")
+	$Stats.Stats = character.stats
+
+
+func _on_CloseButton_pressed():
+	emit_signal(\"close_window\", name)
+"
+
+[node name="CharacterInfo" type="Node2D"]
+pause_mode = 2
+position = Vector2( -530, -279 )
+scale = Vector2( 1.4, 1.4 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Equipment" parent="." instance=ExtResource( 1 )]
+margin_left = 283.0
+margin_top = 46.0
+margin_right = 533.0
+margin_bottom = 367.0
+
+[node name="Inventory" parent="." instance=ExtResource( 2 )]
+margin_left = 4.54747e-13
+margin_bottom = 379.0
+
+[node name="Stats" parent="." instance=ExtResource( 3 )]
+margin_left = 451.0
+margin_top = 7.62939e-06
+margin_right = 451.0
+margin_bottom = 7.62939e-06
+
+[node name="CloseButton" type="TextureButton" parent="."]
+margin_left = 267.0
+margin_top = 15.0
+margin_right = 283.0
+margin_bottom = 31.0
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource( 4 )
+[connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]

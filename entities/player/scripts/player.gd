@@ -1,11 +1,11 @@
 extends Node
 
+class_name Player
+
 export var character = "warrior"
 export var state = "default"
 
-export var speed = 250  # How fast the player will move (pixels/sec).
-var velocity
-var sprite
+var sprite :Character
 var IS_PLAYER = true
 var main_ui
 var camera
@@ -16,7 +16,6 @@ var selectable_distance = 80
 
 func _ready():
 	main_ui = $main_ui
-	main_ui.player = self
 	remove_child($main_ui)
 
 func open_container_ui(container):
@@ -27,7 +26,7 @@ func close_container_ui(container):
 
 func _physics_process(delta):
 	var intersections
-	if sprite:
+	if false == true:
 		var x2 = get_parent().get_global_mouse_position()
 		var r= selectable_distance*(x2-sprite.position).normalized() + sprite.position
 		var mouse_pos = get_parent().get_global_mouse_position()
@@ -60,11 +59,16 @@ func _unhandled_input(event):
 	if sprite:
 		if event is InputEventMouseButton:
 			if event.button_index == BUTTON_LEFT and event.pressed:
-				do_interact = true
+				sprite.activate_skill(get_parent().get_global_mouse_position())
 				
 func _input(event):
 	if sprite:
-
+		if Input.is_action_just_released("interact"):
+			if sprite.can_access:
+				sprite.interact_object()
+			else:
+				$main_ui._on_Inventory_Button_pressed()
+			
 		if Input.is_action_pressed("ui_right"):
 			sprite.movement.RIGHT = true
 		else:
@@ -84,6 +88,8 @@ func _input(event):
 			sprite.movement.UP = true
 		else:
 			sprite.movement.UP = false
+		
+		
 
 		if Input.is_action_just_pressed("activate_skill_1"):
 			sprite.select_skill(1)
@@ -99,5 +105,5 @@ func _input(event):
 			$main_ui.select_slot(4)
 
 func update_ui():
-	$main_ui.set_lifebar_hp(sprite.stats.health/sprite.stats.max_health * 100)
-	$main_ui.set_manabar_mp(sprite.stats.mana/sprite.stats.max_mana * 100)
+	$main_ui.set_lifebar_hp(sprite.stats.health / sprite.stats.max_health * 100)
+	$main_ui.set_manabar_mp(sprite.stats.mana / sprite.stats.max_mana * 100)

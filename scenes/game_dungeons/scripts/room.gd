@@ -8,7 +8,7 @@ var center_tile
 var room_id
 var x_size
 var y_size
-var Door_Object = load("res://entities/doors/Door.tscn")
+var Door_Object = load("res://entities/interactable_objects/door/door_object.tscn")
 
 
 func _ready():
@@ -23,7 +23,6 @@ func _create_room(r_id):
 	x_size = rand_range(10,30)
 	y_size = rand_range(10,30)
 	center_tile = Vector2(x_size/2, y_size/2)
-	#$camera.position = $tile_floor.map_to_world(center_tile) * 4
 
 	# Create Floors
 	for x in range(x_size):
@@ -42,40 +41,37 @@ func _create_room(r_id):
 			$tile_edge.set_cell(x, y, Global.EDGE_AUTO_TILES)
 			$tile_edge.update_bitmask_area(Vector2(x, y))
 
-func place_door(direction, to_node=null):
+func place_door(direction):
 	var x_pos
 	var y_pos
 	var new_door = Door_Object.instance()
-	new_door.to_node = to_node
-	new_door.from_node = room_id
-	new_door.scale_up(4)
-	
+
 	if direction == Global.NORTH:
 		new_door.facing = Global.NORTH
-		new_door._set_sprite(load("res://entities/doors/sprites/door_"+str(int(rand_range(1, 4)))+".png")) 
+		new_door._set_sprite(load("res://entities/interactable_objects/door/sprites/door_"+str(int(rand_range(1, 4)))+".png")) 
 		x_pos = rand_range(1, x_size - 1)
 		y_pos = -1
 		$tile_walls.set_cell(x_pos, y_pos, -1)
 	elif direction == Global.SOUTH:
 		new_door.facing = Global.SOUTH
-		new_door._set_sprite(load("res://entities/doors/sprites/door_v.png")) 
+		new_door._set_sprite(load("res://entities/interactable_objects/door/sprites/door_v.png")) 
 		x_pos = rand_range(1, x_size - 1)
 		y_pos = y_size
 		$tile_edge.set_cell(x_pos, y_pos, -1)
 	elif direction == Global.EAST:
 		new_door.facing = Global.EAST
-		new_door._set_sprite(load("res://entities/doors/sprites/door_h.png"), false, true)
+		new_door._set_sprite(load("res://entities/interactable_objects/door/sprites/door_h.png"), false, true)
 		x_pos = x_size
 		y_pos = rand_range(0, y_size)
 		$tile_edge.set_cell(x_pos, y_pos, -1)
 	elif direction == Global.WEST:
 		new_door.facing = Global.WEST
-		new_door._set_sprite(load("res://entities/doors/sprites/door_h.png"))
+		new_door._set_sprite(load("res://entities/interactable_objects/door/sprites/door_h.png"))
 		x_pos = -1
 		y_pos = rand_range(0, y_size)
 		$tile_edge.set_cell(x_pos, y_pos, -1)
 	
-	new_door.set_position($tile_walls.map_to_world(Vector2(x_pos+1, y_pos+1)) * 4 )
+	new_door.position = $tile_walls.map_to_world(Vector2(x_pos+1, y_pos+1)) * 4 
 	new_door.connect("entity_entered", self, "_door_entered")
 	add_child(new_door)
 	return new_door

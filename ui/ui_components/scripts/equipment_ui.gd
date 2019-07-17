@@ -33,15 +33,15 @@ func update_container():
 		for child in equipment_dict[slots].get_children():
 			equipment_dict[slots].remove_child(child)
 			
-	var Equipment = equipment.Equipment
+	var Equipment = equipment.equipment
 	for key in Equipment.keys():
 		if Equipment[key]:
 			var itemHolder = ItemObject.new(Equipment[key], key)
 			equipment_dict[key].setItem(itemHolder)
 
 func update_ui_slot(index):
-	if equipment.Equipment[index] != null:
-		var itemHolder = ItemObject.new(equipment.Equipment[index], index)
+	if equipment.equipment[index] != null:
+		var itemHolder = ItemObject.new(equipment.equipment[index], index)
 		equipment_dict[index].setItem(itemHolder)
 	else: 
 		equipment_dict[index].removeItem()

@@ -8,7 +8,7 @@ var equipped = false
 
 func on_use(user: Character):
 	if !equipped:
-		if !user.equipment.Equipment[equipment_type]:
+		if !user.equipment.equipment[equipment_type]:
 			print(user.name)
 			user.equipment.equip(self, equipment_type)
 		else:

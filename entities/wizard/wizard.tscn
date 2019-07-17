@@ -9,4 +9,12 @@ ability_book = ExtResource( 2 )
 
 [node name="sprite" parent="." index="0"]
 frames = ExtResource( 3 )
-frame = 2
+
+[node name="Stats" parent="." index="4"]
+max_mana = 20
+mana = 20
+max_health = 15
+health = 15
+strength = 2
+magic = 6
+agility = 3

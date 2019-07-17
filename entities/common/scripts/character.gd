@@ -15,7 +15,7 @@ var sprite
 
 func _ready():
 	sprite = $sprite
-	stats.connect("stat_updated", self, "on_stat_updated")
+	stats.connect("stat_updated", health_status, "on_stat_update")
 	inventory.add_to_first_empty_slot(Item_Generator.Create_Item(0))
 	inventory.add_to_first_empty_slot(Item_Generator.Create_Item(1))
 	inventory.add_to_first_empty_slot(Item_Generator.Create_Item(2))
@@ -24,20 +24,8 @@ func _ready():
 # =======================Stats
 onready var stats = $Stats
 onready var health_status = $HealthStatus
-func on_stat_updated(stat_name):
-	print("OOF1")
-	if stat_name == Global.STAT.HEALTH:
-		print("OOF2")
-		var percent = stats.health / stats.max_health * 100.0
-		print(percent)
-		if percent > 90:
-			health_status.set_texture(0)
-		elif percent > 50:
-			health_status.set_texture(1)
-		elif percent > 20:
-			health_status.set_texture(3)
-		elif percent > 0:
-			health_status.set_texture(4)
+
+		
 # =======================Interactables
 
 var can_access = null
@@ -67,8 +55,8 @@ func close_container(container):
 # =======================Abilities
 export(Script) var ability_book = load("res://abilities/magic_abilities/spell_book/mage_spell_book.gd").new() setget set_skills
 func activate_skill(location):
-	if equipment.Equipment[Global.EQUIPMENT_TYPE.WEAPON] != null:
-		equipment.Equipment[Global.EQUIPMENT_TYPE.WEAPON].activate(self, location)
+	if equipment.equipment[Global.EQUIPMENT_TYPE.WEAPON] != null:
+		equipment.equipment[Global.EQUIPMENT_TYPE.WEAPON].activate(self, location)
 	#ability_book.current_skill = ability_book.primary_skill
 	#var skill = ability_book.current_skill.instance()
 	#get_parent().add_child(skill)

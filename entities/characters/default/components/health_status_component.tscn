@@ -1,6 +1,67 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://entities/characters/default/components/scripts/health_status_component.gd" type="Script" id=1]
+[ext_resource path="res://entities/characters/default/components/sprites/heart_02.png" type="Texture" id=1]
+[ext_resource path="res://entities/characters/default/components/scripts/health_status_component.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "beat_01"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0.45098 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0.944837 ), Color( 1, 1, 1, 0 ) ]
+}
 
 [node name="HealthStatus" type="Sprite"]
-script = ExtResource( 1 )
+modulate = Color( 1, 1, 1, 0 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="recently_updated" type="Timer" parent="."]
+process_mode = 0
+wait_time = 10.0
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/beat_01 = SubResource( 1 )
+anims/fade_in = SubResource( 2 )
+anims/fade_out = SubResource( 3 )
+[connection signal="timeout" from="recently_updated" to="." method="_on_recently_updated_timeout"]

@@ -4,7 +4,7 @@
 [ext_resource path="res://ui/assets/frame_portrait.png" type="Texture" id=2]
 [ext_resource path="res://ui/main_ui/components/LifeBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://ui/main_ui/components/ManaBar.tscn" type="PackedScene" id=4]
-[ext_resource path="res://ui/main_ui/assets/inventory_button.png" type="Texture" id=5]
+[ext_resource path="res://ui/main_ui/assets/inventory_button_new.png" type="Texture" id=5]
 [ext_resource path="res://ui/main_ui/assets/stats_button.png" type="Texture" id=6]
 [ext_resource path="res://ui/main_ui/components/Slot1.tscn" type="PackedScene" id=7]
 [ext_resource path="res://ui/main_ui/assets/ability_bar_icon_bg_primary.png" type="Texture" id=8]
@@ -18,7 +18,6 @@
 script = ExtResource( 1 )
 
 [node name="TopLeft" type="VBoxContainer" parent="."]
-editor/display_folded = true
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 326.0
@@ -69,7 +68,6 @@ margin_right = 296.0
 margin_bottom = 100.0
 
 [node name="MenuButtons" type="MarginContainer" parent="TopLeft"]
-editor/display_folded = true
 margin_top = 124.0
 margin_right = 316.0
 margin_bottom = 208.0
@@ -88,7 +86,6 @@ patch_margin_right = 4
 patch_margin_bottom = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="TopLeft/MenuButtons"]
-editor/display_folded = true
 margin_right = 316.0
 margin_bottom = 84.0
 custom_constants/margin_right = 10

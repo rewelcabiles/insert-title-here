@@ -77,7 +77,7 @@ func process_buffs():
 
 
 func _physics_process(delta):
-	velocity = movement.update_velocity()
+	velocity = movement.update_velocity(delta)
 	if velocity.length() != 0:
 		pass
 		#velocity = velocity.normalized() * stats.get_stat(Global.STAT.SPEED)

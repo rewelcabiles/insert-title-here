@@ -9,10 +9,6 @@ var sprite :Character
 var IS_PLAYER = true
 var main_ui
 var camera
-var do_interact
-var raycast
-var previous_highlight = null
-var selectable_distance = 80
 
 func _ready():
 	main_ui = $main_ui
@@ -23,37 +19,6 @@ func open_container_ui(container):
 
 func close_container_ui(container):
 	main_ui.close_container_window(container.name)
-
-func _physics_process(delta):
-	var intersections
-	if false == true:
-		var x2 = get_parent().get_global_mouse_position()
-		var r= selectable_distance*(x2-sprite.position).normalized() + sprite.position
-		var mouse_pos = get_parent().get_global_mouse_position()
-		var state = get_parent().get_world_2d().get_direct_space_state()
-		intersections = state.intersect_ray(sprite.position, r, [sprite], sprite.collision_mask,true, true)
-		if not intersections:
-			if previous_highlight and is_instance_valid(previous_highlight):
-				previous_highlight.modulate = Color(1, 1, 1)
-				previous_highlight = null
-			else:
-				previous_highlight = null
-
-		if intersections:
-			if intersections.collider != previous_highlight and not intersections.collider is TileMap:
-				if previous_highlight:
-					previous_highlight.modulate = Color(1, 1, 1)
-				intersections.collider.modulate = Color(1, 0, 1)
-				previous_highlight = intersections.collider
-		if do_interact:
-			do_interact = false
-			if intersections and not intersections.collider is TileMap:
-				print(intersections)
-				var other = intersections["collider"]
-				if other.has_method("interacted_by"): # is it an interactable?
-					other.interacted_by(sprite) # let the interactable handle the logic
-			else:
-				sprite.activate_skill(get_parent().get_global_mouse_position())
 
 func _unhandled_input(event):
 	if sprite:
@@ -89,8 +54,6 @@ func _input(event):
 		else:
 			sprite.movement.UP = false
 		
-		
-
 		if Input.is_action_just_pressed("activate_skill_1"):
 			sprite.select_skill(1)
 			$main_ui.select_slot(1)

@@ -1,10 +1,6 @@
-addons/ch.fischspiele.tilesethelper/not_for_export/
-engine.cfg
-icon.png
 .import/
 export.cfg
 export_presets.cfg
+
 addons/
-addongs/*
-default_env.tres
-icon.png.import
+addons/*

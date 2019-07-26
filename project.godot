@@ -71,6 +71,7 @@ Item_Generator="*res://entities/items/scripts/Item_Generator.gd"
 
 window/size/width=1920
 window/size/height=1080
+window/size/fullscreen=true
 window/stretch/mode="viewport"
 window/stretch/aspect="keep_width"
 
@@ -169,4 +170,6 @@ interact={
 
 [rendering]
 
+quality/intended_usage/framebuffer_allocation=0
+quality/2d/use_pixel_snap=true
 environment/default_clear_color=Color( 0.0703125, 0.0703125, 0.0703125, 1 )

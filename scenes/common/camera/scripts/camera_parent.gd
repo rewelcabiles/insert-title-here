@@ -12,5 +12,6 @@ func _process(delta):
 func set_follower(f):
 	follow_target = f
 
+
 func _ready():
 	pass

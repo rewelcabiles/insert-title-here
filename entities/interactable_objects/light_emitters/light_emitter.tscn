@@ -5,11 +5,11 @@
 [ext_resource path="res://entities/interactable_objects/light_emitters/sprites/torch_01.png" type="Texture" id=3]
 [ext_resource path="res://light.png" type="Texture" id=4]
 
-[sub_resource type="CapsuleShape2D" id=4]
+[sub_resource type="CapsuleShape2D" id=1]
 radius = 18.1721
 height = 66.5137
 
-[sub_resource type="ParticlesMaterial" id=1]
+[sub_resource type="ParticlesMaterial" id=2]
 emission_shape = 1
 emission_sphere_radius = 5.0
 flag_disable_z = true
@@ -21,7 +21,7 @@ scale = 5.0
 scale_random = 0.5
 color = Color( 0.854902, 0, 0, 1 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=3]
 emission_shape = 1
 emission_sphere_radius = 3.0
 flag_disable_z = true
@@ -35,7 +35,7 @@ scale = 3.0
 scale_random = 0.5
 color = Color( 0.854902, 0.8, 0, 1 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=4]
 emission_shape = 1
 emission_sphere_radius = 2.0
 flag_disable_z = true
@@ -58,27 +58,24 @@ texture = ExtResource( 3 )
 [node name="CollisionShape2D" parent="." index="1"]
 disabled = true
 
-[node name="AccessArea" parent="." index="2"]
-editor/display_folded = false
-
 [node name="CollisionShape2D" parent="AccessArea" index="0"]
-shape = SubResource( 4 )
+shape = SubResource( 1 )
 
 [node name="RedFlame" type="Particles2D" parent="." index="3"]
 position = Vector2( -0.19371, -5.81135 )
 amount = 15
-process_material = SubResource( 1 )
+process_material = SubResource( 2 )
 
 [node name="YellowFlame" type="Particles2D" parent="." index="4"]
 position = Vector2( -0.19371, -5.81135 )
 lifetime = 0.8
-process_material = SubResource( 2 )
+process_material = SubResource( 3 )
 
 [node name="WhiteFlame" type="Particles2D" parent="." index="5"]
 position = Vector2( -0.19371, -5.81135 )
 amount = 10
 lifetime = 0.8
-process_material = SubResource( 3 )
+process_material = SubResource( 4 )
 
 [node name="Light2D" type="Light2D" parent="." index="6"]
 texture = ExtResource( 4 )

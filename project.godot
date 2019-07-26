@@ -76,7 +76,7 @@ window/stretch/aspect="keep_width"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "open-external-editor" )
+enabled=PoolStringArray(  )
 
 [importer_defaults]
 
@@ -170,4 +170,3 @@ interact={
 [rendering]
 
 environment/default_clear_color=Color( 0.0703125, 0.0703125, 0.0703125, 1 )
-environment/default_environment="res://default_env.tres"

@@ -6,7 +6,7 @@ var LEFT = false
 var RIGHT = false
 var velocity = Vector2()
 var max_speed = 200
-var f_accelerate = 20
+var f_accelerate = 400
 
 func update_velocity(delta):
 	var accelerate = f_accelerate * delta

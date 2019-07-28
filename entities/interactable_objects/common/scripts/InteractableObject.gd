@@ -13,8 +13,8 @@ func on_body_exit(body):
 	
 func _on_AccessArea_body_entered(body):
 	if "can_access" in body:
-		body.can_access = self
+		body.set_can_access(self)
 
 func _on_AccessArea_body_exited(body):
 	if "can_access" in body:
-		body.can_access = null
+		body.set_can_access(null)

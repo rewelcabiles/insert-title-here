@@ -67,6 +67,15 @@ func _input(event):
 			sprite.select_skill(4)
 			$main_ui.select_slot(4)
 
+func set_interact_prompt(body):
+	var interact_prompt = $main_ui.get_node("interact_prompt")
+	interact_prompt.body = body
+	if body == null:
+		interact_prompt.visible = false
+		return
+	interact_prompt.visible = true
+	
+
 func update_ui():
 	$main_ui.set_lifebar_hp(sprite.stats.health / sprite.stats.max_health * 100)
 	$main_ui.set_manabar_mp(sprite.stats.mana / sprite.stats.max_mana * 100)

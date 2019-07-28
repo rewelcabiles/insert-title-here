@@ -29,12 +29,17 @@ onready var health_status = $HealthStatus
 # =======================Interactables
 
 var can_access = null
+signal can_access
 
 func interact_object():
 	print("Starting Interact Function!")
 	if can_access:
 		print("Can Access!")
 		can_access.interacted_by(self)
+
+func set_can_access(body):
+	can_access = body
+	emit_signal("can_access", body)
 
 # =======================Inventory and Containers
 onready var inventory := $Inventory

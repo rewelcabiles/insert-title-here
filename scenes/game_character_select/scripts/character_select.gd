@@ -47,6 +47,7 @@ func set_character(character):
 	player.sprite.start_animation()
 	player.sprite.connect("container_opened", player, "open_container_ui")
 	player.sprite.connect("container_closed", player, "close_container_ui")
+	player.sprite.connect("can_access", player, "set_interact_prompt")
 	player.sprite.connect("moving_scene", player.main_ui, "_set_menu")
 	player.sprite.stats.connect("stat_updated", player, "update_ui")
 	camera = get_parent().get_node("camera")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://ui/main_ui/scripts/main_ui.gd" type="Script" id=1]
 [ext_resource path="res://ui/assets/frame_portrait.png" type="Texture" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://ui/main_ui/components/Slot4.tscn" type="PackedScene" id=11]
 [ext_resource path="res://ui/main_ui/components/Slot5.tscn" type="PackedScene" id=12]
 [ext_resource path="res://ui/main_ui/components/Slot6.tscn" type="PackedScene" id=13]
+[ext_resource path="res://ui/ui_components/interact_prompt_ui.tscn" type="PackedScene" id=14]
 
 [node name="main_ui" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -236,4 +237,7 @@ margin_left = -20.0
 margin_top = -20.0
 margin_right = 20.0
 margin_bottom = 20.0
+
+[node name="interact_prompt" parent="." instance=ExtResource( 14 )]
+visible = false
 [connection signal="pressed" from="TopLeft/MenuButtons/MarginContainer/HBoxContainer/Inventory_Button" to="." method="_on_Inventory_Button_pressed"]

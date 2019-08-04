@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://generator/dungeon/scripts/dungeon_generator.gd" type="Script" id=1]
+[ext_resource path="res://generator/dungeon/scripts/underground_theme.gd" type="Script" id=2]
+[ext_resource path="res://generator/dungeon/scripts/room_generator.gd" type="Script" id=3]
+[ext_resource path="res://generator/dungeon/scripts/drunken_walk.gd" type="Script" id=4]
+
+[node name="dungeon" type="Node"]
+script = ExtResource( 1 )
+
+[node name="underground_theme" type="Node" parent="."]
+script = ExtResource( 2 )
+
+[node name="room_generator" type="Node" parent="underground_theme"]
+editor/display_folded = true
+script = ExtResource( 3 )
+
+[node name="drunken_walk" type="Node" parent="underground_theme/room_generator"]
+script = ExtResource( 4 )
+
+[node name="to_objects" type="Node" parent="underground_theme"]

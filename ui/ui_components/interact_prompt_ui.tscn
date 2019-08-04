@@ -22,10 +22,10 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource( 2 )
 region_rect = Rect2( 2, 2, 60, 60 )
-patch_margin_left = 11
-patch_margin_top = 13
-patch_margin_right = 11
-patch_margin_bottom = 14
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 3
+patch_margin_bottom = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
 margin_right = 142.0

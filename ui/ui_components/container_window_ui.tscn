@@ -45,4 +45,6 @@ margin_right = 282.0
 margin_bottom = 31.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 5 )
+[connection signal="slot_clicked" from="user_inventory" to="." method="_on_user_inventory_slot_clicked"]
+[connection signal="slot_clicked" from="target_inventory" to="." method="_on_target_inventory_slot_clicked"]
 [connection signal="pressed" from="TextureButton" to="." method="_on_TextureButton_pressed"]

@@ -26,6 +26,7 @@ func initialize_container(inv, inv_name):
 		var new_slot = SlotObject.instance()
 		new_slot.slotIndex = index
 		new_slot.connect("slot_update", self, "update_container_slot")
+		new_slot.connect("slot_clicked", self, "slot_clicked")
 		SlotList[index] = new_slot
 		grid.add_child(new_slot)
 	update_container()
@@ -51,3 +52,9 @@ func update_container_slot(index):
 	var slot = SlotList[index]
 	var item = null if slot.itemHolder == null else slot.itemHolder.itemData
 	inventory.add_to_slot(item, index)
+	
+signal slot_clicked
+
+func slot_clicked(index):
+	print("Slot Clicked! 2")
+	emit_signal("slot_clicked", index)

@@ -20,6 +20,10 @@ func set_child_info():
 
 func _on_CloseButton_pressed():
 	emit_signal(\"close_window\", name)
+
+
+func _on_Inventory_slot_clicked(index):
+	character.inventory.inventory[index].on_use(character)
 "
 
 [node name="CharacterInfo" type="Node2D"]
@@ -54,4 +58,5 @@ margin_right = 283.0
 margin_bottom = 31.0
 mouse_default_cursor_shape = 2
 texture_normal = ExtResource( 4 )
+[connection signal="slot_clicked" from="Inventory" to="." method="_on_Inventory_slot_clicked"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]

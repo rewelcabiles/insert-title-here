@@ -6,7 +6,7 @@ export(Global.ITEM) var holds_type = Global.ITEM.ALL
 export(Global.EQUIPMENT_TYPE) var equipment_type
 
 signal slot_update
-signal Slot_Clicked
+signal slot_clicked
 
 export(Texture) var default_texture = preload("res://ui/ui_components/sprite/equipment_slot_default.png")
 var empty_slot_texture = preload("res://ui/ui_components/sprite/equipment_slot_default.png")
@@ -79,4 +79,6 @@ func _gui_input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == BUTTON_LEFT and !event.pressed:
 			if itemHolder != null:
-				itemHolder.itemData.on_use(Global.PLAYER.sprite)
+				print("Slot Clicked!")
+				emit_signal("slot_clicked", slotIndex)
+				#itemHolder.itemData.on_use(Global.PLAYER.sprite)

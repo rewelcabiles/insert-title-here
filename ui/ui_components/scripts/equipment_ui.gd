@@ -25,7 +25,7 @@ func _ready():
 		for key in equipment_dict.keys():
 			equipment_dict[key].initialize(key)
 			equipment_dict[key].connect("slot_update", self, "update_container_slot")
-			equipment_dict[key].connect("Slot_Clicked", self, "update_ui_slot")
+			equipment_dict[key].connect("slot_clicked", self, "click_slot")
 	update_container()
 	
 func update_container():
@@ -54,7 +54,7 @@ func update_container_slot(index: int):
 func click_slot(index: int):
 	var slot = equipment_dict[index]
 	var item = slot.itemHolder.itemData
-	item.on_use(Global.player.sprite)
+	item.on_use(Global.PLAYER.sprite)
 	
 
 

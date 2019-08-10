@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://entities/interactable_objects/door/door_object.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/interactable_objects/stairs/scripts/stairs_object.gd" type="Script" id=2]
+[ext_resource path="res://entities/interactable_objects/stairs/sprites/stairs_01.png" type="Texture" id=3]
+
+[node name="Stairs" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+position = Vector2( 0, -64 )
+texture = ExtResource( 3 )
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 33, 28 )
+
+[node name="AccessArea" parent="." index="2"]
+visible = true
+
+[node name="CollisionShape2D" parent="AccessArea" index="0"]
+position = Vector2( 10, 12 )

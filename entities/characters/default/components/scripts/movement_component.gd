@@ -6,7 +6,7 @@ var LEFT = false
 var RIGHT = false
 var velocity = Vector2()
 var max_speed = 200
-var f_accelerate = 400
+var f_accelerate = 800
 
 func update_velocity(delta):
 	var accelerate = f_accelerate * delta
@@ -21,21 +21,21 @@ func update_velocity(delta):
 	
 	if not LEFT and not RIGHT:
 		if velocity.x > 0:
-			velocity.x += -accelerate * 1.2
+			velocity.x += -accelerate * 2
 			if velocity.x < 0:
 				velocity.x = 0
 		elif velocity.x < 0:
-			velocity.x += accelerate
+			velocity.x += accelerate * 2
 			if velocity.x > 0:
 				velocity.x = 0
 
 	if not UP and not DOWN:
 		if velocity.y > 0:
-			velocity.y += -accelerate * 1.2
+			velocity.y += -accelerate * 2
 			if velocity.y < 0:
 				velocity.y = 0
 		elif velocity.y < 0:
-			velocity.y += accelerate
+			velocity.y += accelerate * 2
 			if velocity.y > 0:
 				velocity.y = 0
 	

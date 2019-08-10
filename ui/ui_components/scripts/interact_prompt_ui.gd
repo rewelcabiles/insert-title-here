@@ -6,7 +6,7 @@ func _process(delta):
 	if body != null:
 		var transform = body.get_global_transform_with_canvas().origin
 		rect_position.x = transform.x
-		rect_position.y = transform.y - 60
+		rect_position.y = transform.y
 
 func _ready():
 	var key_name

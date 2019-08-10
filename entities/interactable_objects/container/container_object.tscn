@@ -20,10 +20,10 @@ open_sprite = ExtResource( 4 )
 texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" parent="." index="1"]
-position = Vector2( 0, 6 )
+position = Vector2( 24, 30 )
 
 [node name="AccessArea" parent="." index="2"]
-position = Vector2( 0, 1 )
+position = Vector2( 24, 25 )
 
 [node name="CollisionShape2D" parent="AccessArea" index="0"]
 position = Vector2( 0, 3 )

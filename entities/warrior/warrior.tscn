@@ -7,3 +7,4 @@
 
 [node name="sprite" parent="." index="0"]
 frames = ExtResource( 2 )
+frame = 1

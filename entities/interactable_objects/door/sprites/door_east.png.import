@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/door_h.png-74e1c8b66fcdbfd51cafcce10dd1fdd1.stex"
+path="res://.import/door_east.png-34ec9afbede5bee9801f90db91b80fc3.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/interactable_objects/door/sprites/door_h.png"
-dest_files=[ "res://.import/door_h.png-74e1c8b66fcdbfd51cafcce10dd1fdd1.stex" ]
+source_file="res://entities/interactable_objects/door/sprites/door_east.png"
+dest_files=[ "res://.import/door_east.png-34ec9afbede5bee9801f90db91b80fc3.stex" ]
 
 [params]
 

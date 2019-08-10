@@ -16,7 +16,6 @@ func _init():
 func equip(new_item: ItemObject, slot: int):
 	new_item.equipped = true
 	equipment[slot] = new_item
-	print(get_parent().name)
 	var inv : InventoryComponent = get_parent().inventory
 	for key in inv.inventory.keys():
 		if inv.inventory[key] == new_item:

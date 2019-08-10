@@ -49,7 +49,8 @@ func update_ui_slot(index):
 func update_container_slot(index: int):
 	var slot = equipment_dict[index]
 	var item = null if slot.itemHolder == null else slot.itemHolder.itemData
-	equipment.equip(item, index)
+	equipment.equipment[index] = item
+	update_ui_slot(index)
 
 func click_slot(index: int):
 	var slot = equipment_dict[index]

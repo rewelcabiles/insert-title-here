@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://dungeon_generator/generator/scripts/generator.gd" type="Script" id=1]
+[ext_resource path="res://dungeon_generator/generator/scripts/room_generator.gd" type="Script" id=2]
+[ext_resource path="res://dungeon_generator/generator/scripts/drunkard_walk_algo.gd" type="Script" id=3]
+[ext_resource path="res://dungeon_generator/generator/scripts/rectangular_algo.gd" type="Script" id=4]
+[ext_resource path="res://dungeon_generator/generator/scripts/floor_generator.gd" type="Script" id=5]
+
+[node name="generator" type="Node"]
+script = ExtResource( 1 )
+
+[node name="room_generator" type="Node" parent="."]
+editor/display_folded = true
+script = ExtResource( 2 )
+
+[node name="drunkard_walk" type="Node" parent="room_generator"]
+script = ExtResource( 3 )
+
+[node name="rectangular" type="Node" parent="room_generator"]
+script = ExtResource( 4 )
+
+[node name="floor_generator" type="Node" parent="."]
+script = ExtResource( 5 )
